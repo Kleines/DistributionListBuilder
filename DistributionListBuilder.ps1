@@ -1,4 +1,4 @@
-# DL_Builder_Final.ps1
+# DistributionListBuilder.ps1
 # PURPOSE
 #   This is designed as a common framework building M365 distribution lists
 # Author: Stephen Kleine [kleines2015@gmail.com]
