@@ -2,7 +2,7 @@
 # PURPOSE
 #   This is designed as a common framework building M365 distribution lists
 # Author: Stephen Kleine [kleines2015@gmail.com]
-# Version 00.10 20210312
+# Version 01.00 20210312
 # Revision  
 #	MVP
 # KNOWN BUGS
@@ -22,7 +22,7 @@ catch {
 	exit(1326) #net helpmsg return code
 }
 #DL build loop
-$null = $BuildDl
+$null = $BuildDL
 Do {
 	$null = $Throwaway
 	$ProposedDistributionListName =  Read-Host "What is the DL name?"
@@ -42,7 +42,7 @@ Until ($BuildDL)
 #Now to Manager for the list
 Clear-Host #for debug only
 $ListManager = $false
-do {
+Do {
 	$ManagedBy = Read-Host "What's the UPN of the manager (leave blank for you)?"
 	if ($ManagedBy -eq "") {
 		$ManagedBy = (get-aduser -Identity $env:USERNAME).UserPrincipalName #No need to check this for validity, it would have bailed on connection if it was
@@ -70,10 +70,10 @@ Until ($ListManager)
 
 #Finally, let's build this puppy
 
-New-DistributionGroup -Name $ProposedDistributionListName -Type Distribution -PrimarySmtpAddress $DistributionListSMTPAddress -ManagedBy $ManagedBy -ErrorAction SilentlyContinue -ErrorVariable $Error
+New-DistributionGroup -Name $ProposedDistributionListName -Type Distribution -PrimarySmtpAddress $DistributionListSMTPAddress -ManagedBy $ManagedBy -ErrorAction SilentlyContinue -ErrorVariable $ErrorResult
 
-If ($Error) {Write-host "Error was $Error"}
+If ($ErrorResult) {Write-host " Error was $ErrorResult " -foregroundcolor white -BackgroundColor red}
 Else {Write-host "$ProposedDistributionListName with email address $DistributionListSMTPAddress managed by $ManagedBy created without incident."}
-
+Start-Sleep 8
 exit(0)
 
