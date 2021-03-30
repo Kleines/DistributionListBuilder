@@ -2,9 +2,11 @@
 # PURPOSE
 #   This is designed as a common framework building M365 distribution lists
 # Author: Stephen Kleine [kleines2015@gmail.com]
-# Version 01.00 20210312
+# Version 01.01 20210330
 # Revision  
-#	MVP
+#	1.01 Minor cleanup
+#	1.00 MVP
+
 # KNOWN BUGS
 #   
 
@@ -76,4 +78,3 @@ If ($ErrorResult) {Write-host " Error was $ErrorResult " -foregroundcolor white 
 Else {Write-host "$ProposedDistributionListName with email address $DistributionListSMTPAddress managed by $ManagedBy created without incident."}
 Start-Sleep 8
 exit(0)
-
